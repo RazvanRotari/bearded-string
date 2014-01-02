@@ -76,13 +76,26 @@ std::string* last_of (std::string *s1, std::string *numbr)
 {
 
     int number;
-    std::string numere("0123456789");
-    if((s1->find_not_first_of(numere, 0)) == std::string::npos)
-    {
-        return last_of(s1, number)
-    }
-    yyerror("Nu este numar la #");
+    //sorry, I do not like the function find_not_first_of :\
+    //std::string numere("0123456789");
+    //if((s1->find_not_first_of(numere, 0)) == std::string::npos)
+    //{
+    //    return last_of(s1, number);
+    //}
+    
 
+    std::string::const_iterator it = s1->begin();
+    while (it != numbr->end() )
+    {
+	if (!std::isdigit (*it))
+	{
+		yyerror("Nu este numar la #");
+		return new std::string("");
+	}
+	++it;
+    }
+
+    return last_of (s1,atoi(numbr->c_str()));    
 }
 
 std::string* mycount (std::string *s1, std::string *s2)
